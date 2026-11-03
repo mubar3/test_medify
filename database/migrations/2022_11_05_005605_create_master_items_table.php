@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('laba');
             $table->string('supplier');
             $table->string('jenis');
+            $table->string('foto')->nullable();
+            $table->foreignId('kategori_id')->constrained('kategori_items')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

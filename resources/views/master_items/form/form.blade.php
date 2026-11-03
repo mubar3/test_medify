@@ -1,4 +1,4 @@
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     @csrf
     @if($method == 'edit')
     <div class="form-group">
@@ -48,9 +48,22 @@
         </select>
     </div>
 
+    @php $selected = $item->kategori_id ?? ''; @endphp
+    <div class="form-group">
+        <label>kategori</label>
+        <select class="form-control" required name="kategori">
+            <option value="" @if(empty($selected)) selected @endif>--Pilih--</option>
+            @foreach ($kategori as $val)
+                <option value="{{ $val->id }}" @if($selected == $val->id) selected @endif>
+                    {{ $val->nama }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
     <div class="form-group">
         <label>Foto</label>
-        <input type="file" class="form-control" name="foto" required>
+        <input type="file" class="form-control" name="foto">
     </div>
 
     <button class="btn btn-primary mt-3">Submit</button>
